@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventes Express - Yves Gnenessemin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== HERO SECTION DYNAMIQUE POUR EXPRESS ===== */
+        .hero-section-express {
+            background: linear-gradient(135deg, rgba(200, 50, 50, 0.8), rgba(0, 0, 0, 0.7)),
+                url('images/tumisu-real-estate.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section-express::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
+            animation: pulseLight 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseLight {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .hero-section-express h1 {
+            font-size: 4.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .hero-section-express p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-badge {
+            background: gold;
+            color: black;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            animation: float 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .countdown-luxe {
+            font-size: 3.5rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 3rem;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid gold;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .express-banner {
+            background: linear-gradient(135deg, #8B0000, #B22222);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.3);
+            border: 1px solid gold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Yves Gnenessemin <span>Agent Certifié</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="residences.html">Résidences</a></li>
+            <li><a href="express-vente.html" class="active">Ventes Express</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- WhatsApp Button -->
+    <a href="#" class="whatsapp-float" onclick="openWhatsApp()">📱</a>
+
+    <!-- Hero Section Express -->
+    <section class="hero-section-express">
+        <div>
+            <div class="floating-badge">⚡ ÉDITION LIMITÉE ⚡</div>
+            <h1>VENTES EXPRESS</h1>
+            <p>Offres exceptionnelles • Durée limitée • Prix négociés</p>
+            <div class="countdown-luxe" id="countdown">24:00:00</div>
+        </div>
+    </section>
+
+    <!-- Section Ventes Express -->
+    <section class="section">
+        <div class="container">
+            <div class="express-banner">
+                <h2 style="font-size: 2.5rem; color: white;">🔥 Jusqu'à -30% sur une sélection exclusive 🔥</h2>
+                <p style="font-size: 1.2rem;">Profitez de nos offres partenaires - Stock limité</p>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterExpress('all')">Tous</button>
+                <button class="filter-btn" onclick="filterExpress('vente')">Ventes</button>
+                <button class="filter-btn" onclick="filterExpress('location')">Locations</button>
+            </div>
+
+            <div class="properties-grid" id="express-grid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Yves Gnenessemin</h3>
+                <p>Agent immobilier certifié</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i>📞</i> <span class="agent-phone">+225 07 10 07 65 50</span></p>
+                <p><i>✉️</i> <span class="agent-email">dgnenessemin@byupathway.edu</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="property-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img src="" alt="" class="modal-image" id="modal-image">
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="js/properties.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function filterExpress(type) {
+            const grid = document.getElementById('express-grid');
+            grid.innerHTML = '';
+
+            let filtered = getExpressProperties();
+            if (type !== 'all') {
+                filtered = filtered.filter(p => p.type === type);
+            }
+
+            filtered.forEach((prop, index) => {
+                grid.appendChild(createPropertyCard(prop, index));
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(type) || (type === 'all' && btn.textContent === 'Tous')) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
+
+            const diff = endOfDay - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            filterExpress('all');
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yves Gnenessemin - Agent Immobilier Certifié</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Styles supplémentaires spécifiques à l'accueil */
+        .hero {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(78, 205, 196, 0.75)),
+                url('images/slaapwijsheid-woman-8136123_1920.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-sombre), var(--primary-dark));
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--primary-dark);
+            color: var(--white);
+        }
+
+        .btn {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--primary-dark);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .agent-badge {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .agent-phone {
+            color: var(--white);
+        }
+
+        .section-title h2 {
+            color: var(--primary-dark);
+        }
+
+        .section-title h2::before,
+        .section-title h2::after {
+            background: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .property-price {
+            color: var(--primary);
+        }
+
+        .property-card:hover {
+            border-color: var(--primary);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-sombre), var(--dark));
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+        }
+
+        .footer-section h3::after {
+            background: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Yves Gnenessemin <span>Agent Certifié</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="residences.html">Résidences</a></li>
+            <li><a href="express-vente.html">Ventes Express</a></li>
+            <li><a href="partenaires.html">Partenaires</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="#" class="whatsapp-float" onclick="openWhatsApp()">📱</a>
+
+    <!-- Info Express Défilante -->
+    <div class="info-express">
+        <div class="scrolling-text">
+            <span><i>🏠</i> VILLA DE LUXE -35% cette semaine</span>
+            <span><i>💰</i> TERRAIN PROMO Riviera 3</span>
+            <span><i>🔑</i> VENTE FLASH : 4 biens exceptionnels</span>
+            <span><i>⭐</i> PARTENAIRE HÔTEL IVOIRE</span>
+            <span><i>🤝</i> OFFRES ENTREPRISES</span>
+        </div>
+    </div>
+
+    <!-- Hero Section avec image d'Abidjan Plateau -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="agent-badge">
+                ⭐ PARTENAIRE OFFICIEL HÔTELS & ENTREPRISES ⭐
+            </div>
+            <h1>Gnenessemin Djeamin Yves</h1>
+            <p>Agent immobilier certifié, partenaire exclusif des plus grands hôtels et entreprises sérieuses. Votre
+                confiance, mon engagement.</p>
+            <!-- Ligne ~65 : Hero Section -->
+            <p class="hero-phone agent-phone">📞 +225 07 10 07 65 50</p>
+            <div class="hero-buttons">
+                <a href="residences.html" class="btn btn-large">VOIR NOS BIENS</a>
+                <a href="contact.html" class="btn btn-large btn-gold">CONTACT</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil Agent -->
+    <div class="container">
+        <div class="agent-profile">
+            <img src="images/YVES.png" alt="Yves Gnenessemin"
+                class="agent-photo">
+            <div class="agent-info">
+                <h3>Gnenessemin Djeamin Yves</h3>
+                <p style="color: var(--primary); font-weight: 600;">Agent Immobilier Certifié • Partenaire Hôtels &
+                    Entreprises</p>
+                <div class="agent-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div>Biens gérés</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div>Partenaires</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div>Satisfaction</div>
+                    </div>
+                </div>
+                <p><i>📞</i> <span class="agent-phone">+225 07 10 07 65 50</span></p>
+                <p><i>✉️</i> <span class="agent-email">dgnenessemin@byupathway.edu</span></p>
+                <p><i>📍</i> Cocody Riviera 3, Abidjan</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aperçu Résidences -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Nos Résidences d'Exception</h2>
+        </div>
+        <div class="container">
+            <div class="filters">
+                <button class="filter-btn" onclick="window.location.href='residences.html?filter=moyen'">Moyen
+                    Standing</button>
+                <button class="filter-btn" onclick="window.location.href='residences.html?filter=haut'">Haut
+                    Standing</button>
+                <button class="filter-btn" onclick="window.location.href='residences.html?filter=luxe'">Luxe</button>
+            </div>
+            <div class="properties-grid" id="home-properties"></div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="residences.html" class="btn btn-large"
+                    style="border-color: var(--primary); color: var(--primary);">Voir toutes nos résidences →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aperçu Ventes Express -->
+    <section class="section section-light">
+        <div class="section-title">
+            <h2>🔥 Ventes Express</h2>
+        </div>
+        <div class="container">
+            <div class="properties-grid" id="express-preview"></div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="express-vente.html" class="btn btn-large btn-red">Voir toutes les offres express →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Yves Gnenessemin</h3>
+                <p>Agent immobilier certifié</p>
+                <p>Partenaire officiel hôtels & entreprises</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Rapide</h3>
+                <p><i>📞</i> <span class="agent-phone">+225 07 10 07 65 50</span></p>
+                <p><i>✉️</i> <span class="agent-email">dgnenessemin@byupathway.edu</span></p>
+                <p><i>📍</i> Cocody Riviera 3, Abidjan</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <ul class="footer-links">
+                    <li><a href="residences.html">Résidences</a></li>
+                    <li><a href="express-vente.html">Ventes Express</a></li>
+                    <li><a href="partenaires.html">Partenaires</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 Yves Gnenessemin - Agent Immobilier Certifié. Tous droits réservés.
+        </div>
+    </footer>
+
+    <!-- Modal Détails -->
+    <div class="modal" id="property-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <img src="" alt="" class="modal-image" id="modal-image">
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="js/properties.js"></script>
+    <script src="js/partners.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Configuration
+        const CONFIG = {
+            phone: '2250789456789',
+            email: 'yves.gnenessemin@azania.ci',
+            agentName: 'Gnenessemin Djeamin Yves'
+        };
+
+        // Fonction WhatsApp
+        function openWhatsApp(propertyTitle = '') {
+            let message = `Bonjour ${CONFIG.agentName}, je suis intéressé par vos services immobiliers.`;
+            if (propertyTitle) {
+                message = `Bonjour ${CONFIG.agentName}, je suis intéressé par ${propertyTitle}. Pouvez-vous me donner plus d'informations ?`;
+            }
+            window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Fonction pour créer une carte de propriété
+        function createPropertyCard(prop, index) {
+            const card = document.createElement('div');
+            card.className = 'property-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+
+            const categoryClass = `category-${prop.category}`;
+            const categoryText = prop.category === 'express' ? 'EXPRESS ' + (prop.promo || '') : prop.category.toUpperCase();
+
+            card.innerHTML = `
+                <div class="property-image" style="background-image: url('${prop.image}')">
+                    <span class="property-category ${categoryClass}">${categoryText}</span>
+                </div>
+                <div class="property-info">
+                    <h3>${prop.title}</h3>
+                    <div class="property-details">
+                        ${prop.beds ? `<span><i>🛏️</i> ${prop.beds} ch</span>` : ''}
+                        ${prop.baths ? `<span><i>🚿</i> ${prop.baths} sdb</span>` : ''}
+                        <span><i>📐</i> ${prop.area}</span>
+                    </div>
+                    <div class="property-price">${prop.price}</div>
+                    <p class="property-location">📍 ${prop.location}</p>
+                    <button class="btn" onclick="showDetails(${prop.id})">Voir détails</button>
+                    <button class="btn btn-wa" onclick="openWhatsApp('${prop.title}')">📱 WhatsApp</button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Fonction pour afficher les détails
+        function showDetails(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            const modal = document.getElementById('property-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalBody = document.getElementById('modal-body');
+
+            modalImage.src = prop.image;
+            modalImage.alt = prop.title;
+
+            modalBody.innerHTML = `
+                <h2 style="color: var(--primary-dark); margin-bottom: 1rem;">${prop.title}</h2>
+                <p style="font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem;">${prop.price}</p>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    ${prop.beds ? `<span><i>🛏️</i> ${prop.beds} chambres</span>` : ''}
+                    ${prop.baths ? `<span><i>🚿</i> ${prop.baths} salles de bain</span>` : ''}
+                    <span><i>📐</i> ${prop.area}</span>
+                </div>
+                <p style="margin-bottom: 1rem;"><strong>📍 Localisation:</strong> ${prop.location}</p>
+                <p style="margin-bottom: 2rem;"><strong>📝 Description:</strong> ${prop.description}</p>
+                ${prop.promo ? `<p style="color: var(--red); font-weight: bold; margin-bottom: 1rem;">🔥 OFFRE SPÉCIALE: ${prop.promo}</p>` : ''}
+                <button class="btn btn-wa" onclick="openWhatsApp('${prop.title}')" style="width: 100%;">
+                    📱 Contacter via WhatsApp
+                </button>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Fonction pour fermer le modal
+        function closeModal() {
+            document.getElementById('property-modal').classList.remove('active');
+        }
+
+        // Chargement des propriétés
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeProps = document.getElementById('home-properties');
+            const expressPreview = document.getElementById('express-preview');
+
+            if (homeProps) {
+                const previewProps = properties.filter(p => p.category !== 'express').slice(0, 3);
+                previewProps.forEach((prop, index) => {
+                    homeProps.appendChild(createPropertyCard(prop, index));
+                });
+            }
+
+            if (expressPreview) {
+                const expressProps = properties.filter(p => p.category === 'express').slice(0, 2);
+                expressProps.forEach((prop, index) => {
+                    expressPreview.appendChild(createPropertyCard(prop, index));
+                });
+            }
+        });
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.onclick = function (event) {
+            const modal = document.getElementById('property-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+
+</html>
