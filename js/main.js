@@ -1,181 +1,356 @@
-// Configuration (vers ligne 15-20)
-const CONFIG = {
-    phone: '2250710076550',        // Nouveau numéro (format international sans +)
-    email: 'dgnenessemin@byupathway.edu',  // Nouvel email
-    agentName: 'Yves Gnenessemin',
-    address: 'Cocody Riviera 3, Abidjan'
-};
-
-// Initialisation
-document.addEventListener('DOMContentLoaded', () => {
-    // Mettre à jour les infos de contact
-    updateContactInfo();
-
-    // Initialiser les animations
-    initAnimations();
-
-    // Mettre à jour le bandeau info express
-    updateInfoExpress();
-});
-
-// Mettre à jour les informations de contact
-function updateContactInfo() {
-    // Mettre à jour le numéro de téléphone
-    document.querySelectorAll('.agent-phone').forEach(el => {
-        el.textContent = CONFIG.phone.replace('225', '+225 ');
-    });
-
-    // Mettre à jour l'email
-    document.querySelectorAll('.agent-email').forEach(el => {
-        el.textContent = CONFIG.email;
-    });
-}
-
-// Fonction WhatsApp
-function openWhatsApp(propertyTitle = '') {
-    let message = `Bonjour ${CONFIG.agentName}, je suis intéressé par vos services immobiliers.`;
-
-    if (propertyTitle) {
-        message = `Bonjour ${CONFIG.agentName}, je suis intéressé par ${propertyTitle}. Pouvez-vous me donner plus d'informations ?`;
+// ===== CHARGEMENT DES DONNÉES =====
+document.addEventListener('DOMContentLoaded', function () {
+    // Charger les résidences sur page d'accueil
+    if (document.getElementById('residences-grid')) {
+        displayProperties(getResidences().slice(0, 3), 'residences-grid');
     }
 
-    window.open(`https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(message)}`, '_blank');
-}
+    // Charger les maisons sur page d'accueil
+    if (document.getElementById('maisons-grid')) {
+        displayProperties(getMaisons().slice(0, 3), 'maisons-grid');
+    }
 
-// Charger les propriétés dans une grille
-function loadProperties(containerId, category = 'all') {
+    // Charger les terrains sur page d'accueil
+    if (document.getElementById('terrains-grid')) {
+        displayProperties(getTerrains().slice(0, 3), 'terrains-grid');
+    }
+
+    // Charger les locations sur page d'accueil
+    if (document.getElementById('location-grid')) {
+        displayProperties(getLocations().slice(0, 3), 'location-grid');
+    }
+
+    // Charger tous les biens en location sur page location.html
+    if (document.getElementById('location-full-grid')) {
+        displayProperties(getLocations(), 'location-full-grid');
+        initFilters();
+    }
+
+    // Charger les témoignages
+    if (document.getElementById('testimonials-grid')) {
+        displayTestimonials();
+    }
+
+    // Charger les partenaires
+    if (document.getElementById('partners-grid')) {
+        displayPartners();
+    }
+
+    // Charger les résidences sur residences.html
+    if (document.getElementById('residences-full-grid')) {
+        displayProperties(getResidences(), 'residences-full-grid');
+    }
+
+    // Charger les maisons sur maisons.html
+    if (document.getElementById('maisons-full-grid')) {
+        displayProperties(getMaisons(), 'maisons-full-grid');
+    }
+
+    // Charger les terrains sur terrains.html
+    if (document.getElementById('terrains-full-grid')) {
+        displayProperties(getTerrains(), 'terrains-full-grid');
+    }
+});
+
+// ===== AFFICHER LES PROPRIÉTÉS =====
+function displayProperties(properties, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const props = category === 'all' ? properties : properties.filter(p => p.category === category);
-
     container.innerHTML = '';
 
-    props.forEach((prop, index) => {
-        const card = createPropertyCard(prop, index);
+    properties.forEach(prop => {
+        const card = document.createElement('div');
+        card.className = 'property-card';
+
+        let detailsHtml = '';
+        if (prop.beds) detailsHtml += `<span>🛏️ ${prop.beds} ch</span>`;
+        if (prop.baths) detailsHtml += `<span>🚿 ${prop.baths} sdb</span>`;
+        detailsHtml += `<span>📐 ${prop.area}</span>`;
+
+        let categoryLabel = '';
+        if (prop.category === 'residence') categoryLabel = 'Résidence';
+        else if (prop.category === 'maison') categoryLabel = 'Maison';
+        else if (prop.category === 'terrain') categoryLabel = 'Terrain';
+        else categoryLabel = 'Location';
+
+        if (prop.duration === 'court') categoryLabel = 'Location courte durée';
+        else if (prop.duration === 'long') categoryLabel = 'Location longue durée';
+
+        card.innerHTML = `
+            <div class="property-image" style="background-image: url('${prop.image}')">
+                <span class="property-category">${categoryLabel}</span>
+            </div>
+            <div class="property-info">
+                <h3>${prop.title}</h3>
+                <div class="property-location">📍 ${prop.location}</div>
+                <div class="property-details">
+                    ${detailsHtml}
+                </div>
+                <div class="property-price">${prop.price}</div>
+                <div class="property-description">${prop.description.substring(0, 100)}...</div>
+                <div class="property-buttons">
+                    <button class="btn btn-outline-dark" onclick="showDetails(${prop.id})">Détails</button>
+                    <a href="https://wa.me/2250710076550?text=Bonjour%20Yves%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20${encodeURIComponent(prop.title)}" 
+                       class="btn btn-primary" target="_blank">📱 WhatsApp</a>
+                </div>
+            </div>
+        `;
+
         container.appendChild(card);
     });
 }
 
-// Créer une carte de propriété
-function createPropertyCard(prop, index) {
-    const card = document.createElement('div');
-    card.className = 'property-card';
-    card.style.animationDelay = `${index * 0.1}s`;
-
-    const categoryClass = `category-${prop.category}`;
-    const categoryText = prop.category === 'express' ? 'EXPRESS ' + (prop.promo || '') : prop.category.toUpperCase();
-
-    card.innerHTML = `
-        <div class="property-image" style="background-image: url('${prop.image}')">
-            <span class="property-category ${categoryClass}">${categoryText}</span>
-        </div>
-        <div class="property-info">
-            <h3>${prop.title}</h3>
-            <div class="property-details">
-                ${prop.beds ? `<span><i>🛏️</i> ${prop.beds} ch</span>` : ''}
-                ${prop.baths ? `<span><i>🚿</i> ${prop.baths} sdb</span>` : ''}
-                <span><i>📐</i> ${prop.area}</span>
-            </div>
-            <div class="property-price">${prop.price}</div>
-            <p class="property-location">📍 ${prop.location}</p>
-            <button class="btn" onclick="showDetails(${prop.id})">Voir détails</button>
-            <button class="btn btn-wa" onclick="openWhatsApp('${prop.title}')">📱 WhatsApp</button>
-        </div>
-    `;
-
-    return card;
-}
-
-// Afficher les détails dans le modal
+// ===== AFFICHER LES DÉTAILS (MODAL) =====
 function showDetails(id) {
-    const prop = properties.find(p => p.id === id);
+    const allProperties = [...getResidences(), ...getMaisons(), ...getTerrains(), ...getLocations()];
+    const prop = allProperties.find(p => p.id === id);
+
     if (!prop) return;
 
-    const modal = document.getElementById('property-modal');
-    const modalImage = document.getElementById('modal-image');
-    const modalBody = document.getElementById('modal-body');
+    let detailsHtml = '';
+    if (prop.beds) detailsHtml += `<span>🛏️ ${prop.beds} chambres</span>`;
+    if (prop.baths) detailsHtml += `<span>🚿 ${prop.baths} salles de bain</span>`;
+    detailsHtml += `<span>📐 ${prop.area}</span>`;
 
-    modalImage.src = prop.image;
-    modalImage.alt = prop.title;
-
-    modalBody.innerHTML = `
-        <h2 style="color: var(--vert-fonce); margin-bottom: 1rem;">${prop.title}</h2>
-        <p style="font-size: 1.2rem; color: var(--vert-clair); margin-bottom: 1rem;">${prop.price}</p>
-        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
-            ${prop.beds ? `<span><i>🛏️</i> ${prop.beds} chambres</span>` : ''}
-            ${prop.baths ? `<span><i>🚿</i> ${prop.baths} salles de bain</span>` : ''}
-            <span><i>📐</i> ${prop.area}</span>
+    const modalHtml = `
+        <div class="modal-overlay" onclick="closeModal()">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <img src="${prop.image}" alt="${prop.title}" class="modal-image">
+                <div class="modal-body">
+                    <h2>${prop.title}</h2>
+                    <div class="modal-price">${prop.price}</div>
+                    <div class="modal-location">📍 ${prop.location}</div>
+                    <div class="modal-details">${detailsHtml}</div>
+                    <div class="modal-description">
+                        <strong>Description complète :</strong>
+                        <p>${prop.description}</p>
+                    </div>
+                    <div class="modal-buttons">
+                        <a href="https://wa.me/2250710076550?text=Bonjour%20Yves%2C%20je%20souhaite%20plus%20d'informations%20sur%20${encodeURIComponent(prop.title)}" 
+                           class="btn btn-primary" target="_blank">📱 Contacter via WhatsApp</a>
+                        <button class="btn btn-outline-dark" onclick="closeModal()">Fermer</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p style="margin-bottom: 1rem;"><strong>📍 Localisation:</strong> ${prop.location}</p>
-        <p style="margin-bottom: 2rem;"><strong>📝 Description:</strong> ${prop.description}</p>
-        ${prop.promo ? `<p class="promo-badge-modal">🔥 OFFRE SPÉCIALE: ${prop.promo}</p>` : ''}
-        <button class="btn btn-wa" onclick="openWhatsApp('${prop.title}')" style="width: 100%;">
-            📱 Contacter via WhatsApp
-        </button>
     `;
 
-    modal.classList.add('active');
+    // Supprimer l'ancien modal s'il existe
+    const oldModal = document.querySelector('.modal-overlay');
+    if (oldModal) oldModal.remove();
+
+    // Ajouter le nouveau modal
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    document.body.style.overflow = 'hidden';
 }
 
-// Fermer le modal
 function closeModal() {
-    const modal = document.getElementById('property-modal');
-    if (modal) modal.classList.remove('active');
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) modal.remove();
+    document.body.style.overflow = '';
 }
 
-// Filtrer les propriétés
-function filterProperties(category, containerId = 'properties-grid') {
-    // Mettre à jour les boutons actifs
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.toLowerCase().includes(category) ||
-            (category === 'all' && btn.textContent === 'Tous')) {
-            btn.classList.add('active');
-        }
+// ===== AFFICHER LES TÉMOIGNAGES =====
+function displayTestimonials() {
+    const container = document.getElementById('testimonials-grid');
+    if (!container) return;
+
+    const temoignagesList = getTemoignages();
+    container.innerHTML = '';
+
+    temoignagesList.forEach(t => {
+        const stars = '★'.repeat(Math.floor(t.rating)) + '☆'.repeat(5 - Math.floor(t.rating));
+
+        const card = document.createElement('div');
+        card.className = 'testimonial-card';
+        card.innerHTML = `
+            <img src="${t.image}" alt="${t.name}" class="testimonial-image">
+            <p class="testimonial-text">"${t.text}"</p>
+            <div class="testimonial-name">${t.name}</div>
+            <div class="testimonial-location">${t.location}</div>
+            <div class="testimonial-rating">${stars} ${t.rating}/5</div>
+        `;
+        container.appendChild(card);
     });
-
-    // Charger les propriétés filtrées
-    loadProperties(containerId, category);
 }
 
-// Mettre à jour le bandeau info express
-function updateInfoExpress() {
-    const expressProps = getExpressProperties();
-    const scrollingText = document.querySelector('.scrolling-text');
+// ===== AFFICHER LES PARTENAIRES =====
+function displayPartners() {
+    const container = document.getElementById('partners-grid');
+    if (!container) return;
 
-    if (scrollingText && expressProps.length > 0) {
-        let html = '';
-        expressProps.forEach(prop => {
-            html += `<span><i>🔥</i> ${prop.promo || 'EXPRESS'} : ${prop.title} - ${prop.price}</span>`;
-        });
-        scrollingText.innerHTML = html;
-    }
+    const partenairesList = getPartenaires();
+    container.innerHTML = '';
+
+    partenairesList.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'partner-card';
+        card.innerHTML = `
+            <div class="partner-icon">${p.icon}</div>
+            <h4>${p.name}</h4>
+            <p>${p.description}</p>
+        `;
+        container.appendChild(card);
+    });
 }
 
-// Initialiser les animations
-function initAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+// ===== FILTRES POUR LOCATION =====
+function initFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    if (!filterBtns.length) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const filter = this.dataset.filter;
+
+            // Mettre à jour l'état actif des boutons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // Filtrer les biens
+            let filteredLocations = getLocations();
+            if (filter !== 'all') {
+                filteredLocations = getLocations().filter(l => l.duration === filter);
             }
-        });
-    });
 
-    document.querySelectorAll('.property-card, .partner-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
+            displayProperties(filteredLocations, 'location-full-grid');
+        });
     });
 }
 
-// Fermer le modal en cliquant à l'extérieur
-window.onclick = function (event) {
-    const modal = document.getElementById('property-modal');
-    if (event.target === modal) {
-        closeModal();
+// ===== STYLES MODAL À AJOUTER DYNAMIQUEMENT =====
+const modalStyles = document.createElement('style');
+modalStyles.textContent = `
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.85);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
     }
-};
+    
+    .modal-content {
+        background: white;
+        width: 90%;
+        max-width: 750px;
+        max-height: 90vh;
+        overflow-y: auto;
+        border-radius: 24px;
+        position: relative;
+        animation: slideUp 0.3s ease;
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--secondary);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: transform 0.3s;
+    }
+    
+    .modal-close:hover {
+        transform: rotate(90deg);
+    }
+    
+    .modal-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    
+    .modal-body {
+        padding: 32px;
+    }
+    
+    .modal-body h2 {
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+    
+    .modal-price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin-bottom: 16px;
+    }
+    
+    .modal-location {
+        color: var(--gray);
+        margin-bottom: 16px;
+    }
+    
+    .modal-details {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .modal-description {
+        margin-bottom: 32px;
+    }
+    
+    .modal-description p {
+        color: var(--gray-dark);
+        margin-top: 8px;
+        line-height: 1.6;
+    }
+    
+    .modal-buttons {
+        display: flex;
+        gap: 16px;
+    }
+    
+    .modal-buttons .btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-price {
+            font-size: 1.4rem;
+        }
+        
+        .modal-buttons {
+            flex-direction: column;
+        }
+    }
+`;
+document.head.appendChild(modalStyles);
