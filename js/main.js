@@ -38,7 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Charger les résidences sur residences.html
     if (document.getElementById('residences-full-grid')) {
-        displayProperties(getResidences(), 'residences-full-grid');
+        const filter = new URLSearchParams(window.location.search).get('filter') || 'all';
+        filterProperties(filter, 'residences-full-grid');
+    }
+
+    // Charger la sélection Express Vente sur express-vente.html
+    if (document.getElementById('express-grid')) {
+        filterExpress('all');
     }
 
     // Charger les maisons sur maisons.html
@@ -103,8 +109,7 @@ function displayProperties(properties, containerId) {
 
 // ===== AFFICHER LES DÉTAILS (MODAL) =====
 function showDetails(id) {
-    const allProperties = [...getResidences(), ...getMaisons(), ...getTerrains(), ...getLocations()];
-    const prop = allProperties.find(p => p.id === id);
+    const prop = getAllProperties().find(p => p.id === id);
 
     if (!prop) return;
 
@@ -177,11 +182,10 @@ function displayTestimonials() {
 }
 
 // ===== AFFICHER LES PARTENAIRES =====
-function displayPartners() {
+function displayPartners(partenairesList = getPartenaires()) {
     const container = document.getElementById('partners-grid');
     if (!container) return;
 
-    const partenairesList = getPartenaires();
     container.innerHTML = '';
 
     partenairesList.forEach(p => {
@@ -193,6 +197,49 @@ function displayPartners() {
             <p>${p.description}</p>
         `;
         container.appendChild(card);
+    });
+}
+
+// ===== FILTRES PARTENAIRES (partenaires.html) =====
+function filterPartners(category) {
+    const partenairesList = category === 'all'
+        ? getPartenaires()
+        : getPartenaires().filter(p => p.category === category);
+
+    displayPartners(partenairesList);
+    setActiveFilter(category);
+}
+
+// ===== FILTRES RÉSIDENCES PAR STANDING (residences.html) =====
+function loadProperties(containerId, filter = 'all') {
+    let residencesList = getResidences();
+    if (filter !== 'all') {
+        residencesList = residencesList.filter(r => r.standing === filter);
+    }
+
+    displayProperties(residencesList, containerId);
+}
+
+function filterProperties(filter, containerId) {
+    loadProperties(containerId, filter);
+    setActiveFilter(filter);
+}
+
+// ===== FILTRES EXPRESS VENTE (express-vente.html) =====
+function filterExpress(type) {
+    let expressList = getExpressProperties();
+    if (type !== 'all') {
+        expressList = expressList.filter(p => p.type === type);
+    }
+
+    displayProperties(expressList, 'express-grid');
+    setActiveFilter(type);
+}
+
+// Met en surbrillance le bouton de filtre correspondant (attribut data-filter)
+function setActiveFilter(filter) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
     });
 }
 

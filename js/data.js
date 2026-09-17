@@ -6,6 +6,7 @@ const residences = [
         id: 1,
         title: "Appartement Moderne Plateau",
         category: "residence",
+        standing: "moyen",
         price: "85 000 FCFA/nuit",
         location: "Plateau, Abidjan",
         beds: 2,
@@ -20,6 +21,7 @@ const residences = [
         id: 2,
         title: "Résidence Les Jardins",
         category: "residence",
+        standing: "luxe",
         price: "150 000 FCFA/nuit",
         location: "Cocody Angré",
         beds: 3,
@@ -34,6 +36,7 @@ const residences = [
         id: 3,
         title: "Appartement Riviera 3",
         category: "residence",
+        standing: "haut",
         price: "130 000 FCFA/nuit",
         location: "Riviera 3, Cocody",
         beds: 3,
@@ -226,13 +229,17 @@ const temoignages = [
 
 // ===== PARTENAIRES =====
 const partenaires = [
-    { id: 1, name: "Hôtel Ivoire", icon: "🏨", description: "Partenariat exclusif" },
-    { id: 2, name: "Hôtel Tiama", icon: "🏨", description: "Partenaire officiel" },
-    { id: 3, name: "Groupe Nasa", icon: "🏢", description: "Logements d'entreprise" },
-    { id: 4, name: "Orange CI", icon: "📱", description: "Partenaire télécom" },
-    { id: 5, name: "Ecobank", icon: "🏦", description: "Solutions financières" },
-    { id: 6, name: "Air France", icon: "✈️", description: "Voyages d'affaires" }
+    { id: 1, name: "Hôtel Ivoire", category: "hotel", icon: "🏨", description: "Partenariat exclusif" },
+    { id: 2, name: "Hôtel Tiama", category: "hotel", icon: "🏨", description: "Partenaire officiel" },
+    { id: 3, name: "Groupe Nasa", category: "entreprise", icon: "🏢", description: "Logements d'entreprise" },
+    { id: 4, name: "Orange CI", category: "entreprise", icon: "📱", description: "Partenaire télécom" },
+    { id: 5, name: "Ecobank", category: "entreprise", icon: "🏦", description: "Solutions financières" },
+    { id: 6, name: "Air France", category: "transport", icon: "✈️", description: "Voyages d'affaires" }
 ];
+
+// ===== SÉLECTION EXPRESS VENTE =====
+// Ids des biens mis en avant sur express-vente.html (ventes et locations)
+const expressSelectionIds = [4, 5, 7, 2, 10, 11];
 
 // Fonctions pour récupérer les données
 function getResidences() { return residences; }
@@ -241,3 +248,16 @@ function getTerrains() { return terrains; }
 function getLocations() { return locations; }
 function getTemoignages() { return temoignages; }
 function getPartenaires() { return partenaires; }
+
+// Tous les biens, toutes catégories confondues
+function getAllProperties() {
+    return [...residences, ...maisons, ...terrains, ...locations];
+}
+
+// Les biens de la sélection Express Vente, dans l'ordre de la sélection
+function getExpressProperties() {
+    const all = getAllProperties();
+    return expressSelectionIds
+        .map(id => all.find(p => p.id === id))
+        .filter(Boolean);
+}

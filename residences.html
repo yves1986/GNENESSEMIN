@@ -146,14 +146,17 @@
 
         <div class="container">
             <div class="filters">
-                <button class="filter-btn active" onclick="filterProperties('all', 'residences-grid')">Tous</button>
-                <button class="filter-btn" onclick="filterProperties('moyen', 'residences-grid')">Moyen
-                    Standing</button>
-                <button class="filter-btn" onclick="filterProperties('haut', 'residences-grid')">Haut Standing</button>
-                <button class="filter-btn" onclick="filterProperties('luxe', 'residences-grid')">Luxe</button>
+                <button class="filter-btn active" data-filter="all"
+                    onclick="filterProperties('all', 'residences-full-grid')">Tous</button>
+                <button class="filter-btn" data-filter="moyen"
+                    onclick="filterProperties('moyen', 'residences-full-grid')">Moyen Standing</button>
+                <button class="filter-btn" data-filter="haut"
+                    onclick="filterProperties('haut', 'residences-full-grid')">Haut Standing</button>
+                <button class="filter-btn" data-filter="luxe"
+                    onclick="filterProperties('luxe', 'residences-full-grid')">Luxe</button>
             </div>
 
-            <div class="properties-grid" id="residences-grid"></div>
+            <div class="properties-grid" id="residences-full-grid"></div>
         </div>
     </section>
 
@@ -175,35 +178,8 @@
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="property-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <img src="" alt="" class="modal-image" id="modal-image">
-            <div class="modal-body" id="modal-body"></div>
-        </div>
-    </div>
-
-    <script src="js/properties.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const filter = urlParams.get('filter');
-
-            if (filter) {
-                filterProperties(filter, 'residences-grid');
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.textContent.toLowerCase().includes(filter)) {
-                        btn.classList.add('active');
-                    }
-                });
-            } else {
-                loadProperties('residences-grid', 'all');
-            }
-        });
-    </script>
 </body>
 
 </html>

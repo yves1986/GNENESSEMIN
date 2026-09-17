@@ -150,10 +150,12 @@
 
         <div class="container">
             <div class="filters">
-                <button class="filter-btn active" onclick="filterPartners('all')">Tous</button>
-                <button class="filter-btn" onclick="filterPartners('hotel')">Hôtels</button>
-                <button class="filter-btn" onclick="filterPartners('entreprise')">Entreprises</button>
-                <button class="filter-btn" onclick="filterPartners('transport')">Transport</button>
+                <button class="filter-btn active" data-filter="all" onclick="filterPartners('all')">Tous</button>
+                <button class="filter-btn" data-filter="hotel" onclick="filterPartners('hotel')">Hôtels</button>
+                <button class="filter-btn" data-filter="entreprise"
+                    onclick="filterPartners('entreprise')">Entreprises</button>
+                <button class="filter-btn" data-filter="transport"
+                    onclick="filterPartners('transport')">Transport</button>
             </div>
 
             <div class="partners-grid" id="partners-grid"></div>
@@ -233,42 +235,8 @@
         </div>
     </footer>
 
-    <script src="js/partners.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        function loadPartners(category = 'all') {
-            const grid = document.getElementById('partners-grid');
-            grid.innerHTML = '';
-
-            const partnersList = category === 'all' ? partners : partners.filter(p => p.category === category);
-
-            partnersList.forEach(partner => {
-                const div = document.createElement('div');
-                div.className = 'partner-item';
-                div.innerHTML = `
-                    <div class="partner-icon">${partner.icon}</div>
-                    <h3>${partner.name}</h3>
-                    <p style="color: var(--primary);">${partner.description}</p>
-                `;
-                grid.appendChild(div);
-            });
-        }
-
-        function filterPartners(category) {
-            loadPartners(category);
-
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'Tous')) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPartners('all');
-        });
-    </script>
 </body>
 
 </html>
