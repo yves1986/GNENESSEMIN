@@ -38,8 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Charger les résidences sur residences.html
     if (document.getElementById('residences-full-grid')) {
-        const filter = new URLSearchParams(window.location.search).get('filter') || 'all';
-        filterProperties(filter, 'residences-full-grid');
+        displayProperties(getResidences(), 'residences-full-grid');
     }
 
     // Charger la sélection Express Vente sur express-vente.html
@@ -208,21 +207,6 @@ function filterPartners(category) {
 
     displayPartners(partenairesList);
     setActiveFilter(category);
-}
-
-// ===== FILTRES RÉSIDENCES PAR STANDING (residences.html) =====
-function loadProperties(containerId, filter = 'all') {
-    let residencesList = getResidences();
-    if (filter !== 'all') {
-        residencesList = residencesList.filter(r => r.standing === filter);
-    }
-
-    displayProperties(residencesList, containerId);
-}
-
-function filterProperties(filter, containerId) {
-    loadProperties(containerId, filter);
-    setActiveFilter(filter);
 }
 
 // ===== FILTRES EXPRESS VENTE (express-vente.html) =====
