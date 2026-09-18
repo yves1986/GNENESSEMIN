@@ -4,203 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résidences de Luxe - Yves Gnenessemin</title>
+    <title>Résidences - Gnenessemin Immobilier</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ===== HERO SECTION LUXE POUR RÉSIDENCES ===== */
-        .hero-section-luxe {
-            background: linear-gradient(135deg, rgba(10, 20, 30, 0.8), rgba(0, 150, 150, 0.6)),
-                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-top: 70px;
-            padding: 5rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section-luxe::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="white" stroke-width="1"/><circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="1"/></svg>');
-            background-size: 50px 50px;
-            animation: movePattern 20s linear infinite;
-        }
-
-        @keyframes movePattern {
-            0% {
-                transform: translateX(0) translateY(0);
-            }
-
-            100% {
-                transform: translateX(50px) translateY(50px);
-            }
-        }
-
-        .hero-section-luxe h1 {
-            font-size: 4rem;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-section-luxe p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-section-luxe .badge-luxe {
-            background: rgba(255, 215, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid gold;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 2rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Animation d'apparition */
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .hero-section-luxe>div {
-            animation: fadeInScale 1.5s ease;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Playfair+Display:wght@400..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navigation -->
+
     <nav class="navbar">
-        <a href="index.html" class="logo">Yves Gnenessemin <span>Agent Certifié</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="residences.html" class="active">Résidences</a></li>
-            <li><a href="express-vente.html">Ventes Express</a></li>
-            <li><a href="partenaires.html">Partenaires</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo/logo.png" alt="Gnenessemin" class="logo-img">
+                <span class="logo-text">Gnenessemin</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="residences.html" class="active">Résidences</a></li>
+                <li><a href="maisons.html">Maisons</a></li>
+                <li><a href="terrains.html">Terrains</a></li>
+                <li><a href="location.html">Location</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- WhatsApp Button -->
-    <a href="#" class="whatsapp-float" onclick="openWhatsApp()">📱</a>
+    <a href="https://wa.me/2250710076550" class="whatsapp-float" target="_blank">
+        <img src="images/penthouse Azania.jpg" alt="WhatsApp">
+        <span>Discutons</span>
+    </a>
 
-    <!-- Info Express -->
-    <div class="info-express">
-        <div class="scrolling-text">
-            <span><i>🏠</i> VILLA DE LUXE -35% cette semaine</span>
-            <span><i>💰</i> TERRAIN PROMO Riviera 3</span>
-            <span><i>🔑</i> VENTE FLASH : 4 biens exceptionnels</span>
-        </div>
-    </div>
-
-    <!-- Hero Section Luxe -->
-    <section class="hero-section-luxe">
-        <div>
-            <div class="badge-luxe">✦ COLLECTION EXCLUSIVE ✦</div>
-            <h1>Résidences d'Exception</h1>
-            <p>Découvrez notre sélection de biens d'exception • Prestige • Confort • Élégance</p>
+    <section class="page-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Nos Résidences</h1>
+            <p>Appartements modernes et prestigieux • Moyen et haut standing</p>
         </div>
     </section>
 
-    <!-- Section Résidences -->
     <section class="section">
-        <div class="section-title">
-            <h2>Nos Résidences</h2>
-            <p style="color: var(--gray); margin-top: 1rem;">Moyen standing • Haut standing • Luxe</p>
-        </div>
-
         <div class="container">
-            <div class="filters">
-                <button class="filter-btn active" onclick="filterProperties('all', 'residences-grid')">Tous</button>
-                <button class="filter-btn" onclick="filterProperties('moyen', 'residences-grid')">Moyen
-                    Standing</button>
-                <button class="filter-btn" onclick="filterProperties('haut', 'residences-grid')">Haut Standing</button>
-                <button class="filter-btn" onclick="filterProperties('luxe', 'residences-grid')">Luxe</button>
+            <div class="section-header">
+                <span class="section-tag">✦ Notre sélection ✦</span>
+                <h2>Résidences d'Exception</h2>
+                <p>Des biens d'exception sélectionnés pour vous</p>
             </div>
-
-            <div class="properties-grid" id="residences-grid"></div>
+            <div class="properties-grid" id="residences-full-grid"></div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Yves Gnenessemin</h3>
-                <p>Agent immobilier certifié</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Gnenessemin<br><small>IMMOBILIER</small></h3>
+                    <p>Agent immobilier certifié, partenaire officiel des plus grands hôtels et entreprises de Côte
+                        d'Ivoire.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="residences.html">Résidences</a></li>
+                        <li><a href="maisons.html">Maisons</a></li>
+                        <li><a href="terrains.html">Terrains</a></li>
+                        <li><a href="location.html">Location</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📞 +225 07 10 07 65 50</li>
+                        <li>✉️ dgnenessemin@byupathway.edu</li>
+                        <li>📍 Cocody Riviera 3</li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Contact Rapide</h3>
-                <p><i>📞</i> <span class="agent-phone">+225 07 10 07 65 50</span></p>
-                <p><i>✉️</i> <span class="agent-email">dgnenessemin@byupathway.edu</span></p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Yves Gnenessemin - Agent Immobilier Certifié</p>
             </div>
-        </div>
-        <div class="copyright">
-            © 2025 Yves Gnenessemin - Agent Immobilier Certifié
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="property-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <img src="" alt="" class="modal-image" id="modal-image">
-            <div class="modal-body" id="modal-body"></div>
-        </div>
-    </div>
-
-    <script src="js/properties.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const filter = urlParams.get('filter');
-
-            if (filter) {
-                filterProperties(filter, 'residences-grid');
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.textContent.toLowerCase().includes(filter)) {
-                        btn.classList.add('active');
-                    }
-                });
-            } else {
-                loadProperties('residences-grid', 'all');
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('residences-full-grid')) {
+                displayProperties(getResidences(), 'residences-full-grid');
             }
         });
     </script>

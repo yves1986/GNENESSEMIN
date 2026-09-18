@@ -11,7 +11,7 @@ const residences = [
         beds: 2,
         baths: 1,
         area: "120 m²",
-        image: "images/residences/appartment1.jpg",
+        image: "images/villa.jpg",
         description: "Appartement moderne au cœur du Plateau, idéal pour hommes d'affaires. Entièrement équipé et sécurisé avec vue imprenable sur la ville.",
         type: "location",
         duration: "court"
@@ -25,7 +25,7 @@ const residences = [
         beds: 3,
         baths: 2,
         area: "200 m²",
-        image: "images/residences/appartment2.jpg",
+        image: "images/bcl869-hotel-4340863_1920.jpg",
         description: "Appartement haut standing avec jardin privé, accès piscine et salle de sport. Parfait pour les séjours d'affaires.",
         type: "location",
         duration: "court"
@@ -39,7 +39,7 @@ const residences = [
         beds: 3,
         baths: 2,
         area: "180 m²",
-        image: "images/residences/appartment3.jpg",
+        image: "images/pexels-bed-1839183.jpg",
         description: "Bel appartement avec vue sur la lagune, prestations haut de gamme. Quartier résidentiel calme et sécurisé.",
         type: "location",
         duration: "court"

@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Yves Gnenessemin | Agent Immobilier Certifié</title>
+    <title>Contact - Gnenessemin Immobilier | Agent Certifié</title>
     <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Playfair+Display:wght@400..900&display=swap"
+        rel="stylesheet">
     <style>
         /* ===== STYLES SPÉCIFIQUES À LA PAGE CONTACT ===== */
 
@@ -19,12 +22,9 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(78, 205, 196, 0.75)),
-                url('images/villa.jpg');
-            /* Image pour la page contact */
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85), rgba(52, 73, 94, 0.75)), url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             margin-top: 70px;
             padding: 4rem 2rem;
         }
@@ -33,6 +33,7 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Playfair Display', serif;
         }
 
         .hero-section p {
@@ -41,58 +42,223 @@
             margin: 0 auto;
         }
 
-        /* Styles supplémentaires */
-        .contact-highlight {
-            background: var(--primary);
-            color: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            margin-bottom: 2rem;
+        /* Conteneur de contact avec badge centré */
+        .contact-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .availability-badge {
+        /* Badge disponibilité CENTRÉ */
+        .availability-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .availability-badge-centered {
+            background: linear-gradient(135deg, var(--gold), #F39C12);
+            color: var(--primary-dark);
+            padding: 16px 32px;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.4);
+            }
+
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 15px rgba(241, 196, 15, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(241, 196, 15, 0);
+            }
+        }
+
+        .availability-badge-centered span {
+            font-size: 1.8rem;
+        }
+
+        /* Container contact en 2 colonnes */
+        .contact-container-modern {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 60px;
+        }
+
+        /* Informations de contact (côté gauche) */
+        .contact-info-modern {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info-modern::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 150%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .contact-info-modern h3 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .agent-badge-modern {
             background: var(--gold);
             color: var(--primary-dark);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-full);
             display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
             font-weight: 600;
-            margin-top: 1rem;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .contact-detail-modern {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.5rem;
+            gap: 16px;
+            margin: 24px 0;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        .contact-detail-modern:hover {
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon-modern {
+            font-size: 2rem;
+        }
+
+        .contact-detail-modern strong {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .contact-detail-modern span {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Formulaire (côté droit) */
+        .contact-form-modern {
+            padding: 40px;
+        }
+
+        .contact-form-modern h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .form-group-modern {
+            margin-bottom: 24px;
+        }
+
+        .form-group-modern label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .form-group-modern input,
+        .form-group-modern select,
+        .form-group-modern textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
             transition: all 0.3s;
         }
 
-        .social-link:hover {
-            background: var(--gold);
-            transform: translateY(-5px);
-            color: var(--primary-dark);
+        .form-group-modern input:focus,
+        .form-group-modern select:focus,
+        .form-group-modern textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+        }
+
+        .required-field::after {
+            content: " *";
+            color: var(--red);
+        }
+
+        .btn-submit {
+            background: var(--secondary);
+            color: white;
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-light);
+            transform: translateY(-2px);
         }
 
         .form-success {
             display: none;
             background: #4CAF50;
             color: white;
-            padding: 1rem;
+            padding: 16px;
             border-radius: var(--radius-md);
-            margin-bottom: 1rem;
+            margin-bottom: 24px;
             text-align: center;
         }
 
@@ -100,81 +266,149 @@
             display: block;
         }
 
-        .required-field::after {
-            content: " *";
-            color: var(--red);
-            font-weight: bold;
-        }
-
-        .office-hours {
+        /* Section horaires */
+        .office-hours-modern {
             background: var(--gray-light);
-            padding: 1.5rem;
+            padding: 24px;
             border-radius: var(--radius-lg);
-            margin-top: 2rem;
+            margin-top: 24px;
+            position: relative;
+            z-index: 2;
         }
 
-        .office-hours h4 {
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
+        .office-hours-modern h4 {
+            color: var(--primary);
+            margin-bottom: 16px;
         }
 
-        .hours-grid {
+        .hours-grid-modern {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: 0.5rem 1rem;
+            gap: 12px 20px;
         }
 
         .hours-day {
             font-weight: 600;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
-        /* Ajustements pour la carte */
-        .map-placeholder {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: var(--white);
+        /* Section carte */
+        .map-section-modern {
+            padding: 60px 0;
+            background: var(--gray-light);
+        }
+
+        .map-container-modern {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .map-placeholder-modern {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 60px 40px;
+            border-radius: var(--radius-lg);
+            color: white;
+            margin: 24px 0;
+        }
+
+        .map-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
         }
 
         .map-button {
-            background: var(--white);
-            color: var(--primary-dark);
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
         }
 
         .map-button:hover {
-            background: var(--primary);
-            color: var(--white);
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .faq-card {
+            background: white;
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .faq-card h4 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-container-modern {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .availability-badge-centered {
+                font-size: 1rem;
+                padding: 12px 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navigation -->
+
+    <!-- ===== NAVIGATION AVEC LOGO ===== -->
     <nav class="navbar">
-        <a href="index.html" class="logo">Yves Gnenessemin <span>Agent Certifié</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="residences.html">Résidences</a></li>
-            <li><a href="express-vente.html">Ventes Express</a></li>
-            <li><a href="partenaires.html">Partenaires</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo/logo.png" alt="Gnenessemin" class="logo-img">
+                <span class="logo-text">Gnenessemin</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="residences.html">Résidences</a></li>
+                <li><a href="maisons.html">Maisons</a></li>
+                <li><a href="terrains.html">Terrains</a></li>
+                <li><a href="location.html">Location</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- WhatsApp Button -->
-    <a href="#" class="whatsapp-float" onclick="openWhatsApp()" aria-label="Contacter sur WhatsApp">📱</a>
+    <!-- ===== WHATSAPP FLOTTANT ===== -->
+    <a href="https://wa.me/2250710076550" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        <span>Discutons</span>
+    </a>
 
-    <!-- Info Express Défilante -->
-    <div class="info-express">
-        <div class="scrolling-text">
-            <span><i>🏠</i> VILLA DE LUXE -35% cette semaine</span>
-            <span><i>💰</i> TERRAIN PROMO Riviera 3</span>
-            <span><i>🔑</i> VENTE FLASH : 4 biens exceptionnels</span>
-            <span><i>⭐</i> PARTENAIRE HÔTEL IVOIRE</span>
-            <span><i>🤝</i> CONTACTEZ-MOI 7J/7</span>
-        </div>
-    </div>
-
-    <!-- Hero Section avec image d'arrière-plan -->
+    <!-- ===== HERO SECTION ===== -->
     <section class="hero-section">
         <div>
             <h1>Contactez-moi</h1>
@@ -182,48 +416,56 @@
         </div>
     </section>
 
-    <!-- Section Contact -->
+    <!-- ===== BADGE DISPONIBILITÉ CENTRÉ ===== -->
+    <div class="availability-section">
+        <div class="availability-badge-centered">
+            <span>⚡</span> Disponible immédiatement <span>⚡</span>
+        </div>
+    </div>
+
+    <!-- ===== SECTION CONTACT PRINCIPALE ===== -->
     <section class="section">
-        <div class="container">
-            <!-- Message de succès (caché par défaut) -->
-            <div class="form-success" id="formSuccess" role="alert">
+        <div class="contact-wrapper">
+
+            <!-- Message de succès -->
+            <div class="form-success" id="formSuccess">
                 ✅ Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.
             </div>
 
-            <div class="contact-container">
-                <!-- Informations de contact -->
-                <div class="contact-info">
-                    <h3>Yves Gnenessemin</h3>
-                    <p class="agent-badge"
-                        style="background: var(--gold); color: var(--primary-dark); margin-bottom: 2rem;">
-                        ⭐ Agent Immobilier Certifié ⭐
-                    </p>
+            <!-- Container 2 colonnes -->
+            <div class="contact-container-modern">
 
-                    <p style="margin-bottom: 2rem;">
+                <!-- Colonne gauche : Infos -->
+                <div class="contact-info-modern">
+                    <h3>Yves Gnenessemin</h3>
+                    <div class="agent-badge-modern">
+                        ⭐ Agent Immobilier Certifié ⭐
+                    </div>
+                    <p style="margin-bottom: 32px;">
                         Agent immobilier certifié, partenaire des plus grandes enseignes hôtelières
                         et entreprises de Côte d'Ivoire. À votre écoute pour tous vos projets.
                     </p>
 
-                    <div class="contact-detail">
-                        <div class="contact-icon" aria-hidden="true">📞</div>
+                    <div class="contact-detail-modern">
+                        <div class="contact-icon-modern">📞</div>
                         <div>
                             <strong>Téléphone</strong>
-                            <span class="agent-phone">+225 07 10 07 65 50</span>
+                            <span>+225 07 10 07 65 50</span>
                             <small style="display: block; opacity: 0.8;">Disponible 24h/24</small>
                         </div>
                     </div>
 
-                    <div class="contact-detail">
-                        <div class="contact-icon" aria-hidden="true">✉️</div>
+                    <div class="contact-detail-modern">
+                        <div class="contact-icon-modern">✉️</div>
                         <div>
                             <strong>Email</strong>
-                            <span class="agent-email">dgnenessemin@byupathway.edu</span>
+                            <span>dgnenessemin@byupathway.edu</span>
                             <small style="display: block; opacity: 0.8;">Réponse sous 2h</small>
                         </div>
                     </div>
 
-                    <div class="contact-detail">
-                        <div class="contact-icon" aria-hidden="true">📍</div>
+                    <div class="contact-detail-modern">
+                        <div class="contact-icon-modern">📍</div>
                         <div>
                             <strong>Adresse</strong>
                             <span>Cocody Riviera 3, Abidjan</span>
@@ -231,10 +473,10 @@
                         </div>
                     </div>
 
-                    <!-- Horaires d'ouverture -->
-                    <div class="office-hours">
+                    <!-- Horaires -->
+                    <div class="office-hours-modern">
                         <h4>🕐 Horaires d'ouverture</h4>
-                        <div class="hours-grid">
+                        <div class="hours-grid-modern">
                             <span class="hours-day">Lundi - Vendredi:</span>
                             <span>08h00 - 19h00</span>
                             <span class="hours-day">Samedi:</span>
@@ -245,57 +487,36 @@
                             <span>24h/24 (WhatsApp)</span>
                         </div>
                     </div>
-
-                    <!-- Badge disponibilité -->
-                    <div class="availability-badge">
-                        ⚡ Disponible immédiatement
-                    </div>
-
-                    <!-- Réseaux sociaux -->
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
-                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">🔗</a>
-                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
-                    </div>
                 </div>
 
-                <!-- Formulaire de contact -->
-                <div class="contact-form">
-                    <h3 style="color: var(--primary-dark);">Envoyez-moi un message</h3>
-                    <p class="text-gray" style="margin-bottom: 2rem;">
+                <!-- Colonne droite : Formulaire -->
+                <div class="contact-form-modern">
+                    <h3>Envoyez-moi un message</h3>
+                    <p style="color: var(--gray); margin-bottom: 24px;">
                         Remplissez le formulaire ci-dessous et je vous répondrai dans les plus brefs délais.
                         <br><small>Les champs marqués d'un <span style="color: var(--red);">*</span> sont
                             obligatoires.</small>
                     </p>
 
-                    <form id="contactForm" onsubmit="sendMessage(event)" novalidate>
-                        <!-- Champ Nom -->
-                        <div class="form-group">
-                            <label for="fullname" class="required-field">Nom complet</label>
-                            <input type="text" id="fullname" name="fullname" placeholder="Ex: Jean Kouassi" required
-                                aria-required="true" title="Veuillez entrer votre nom complet">
+                    <form id="contactForm" onsubmit="sendMessage(event)">
+                        <div class="form-group-modern">
+                            <label class="required-field">Nom complet</label>
+                            <input type="text" id="fullname" placeholder="Ex: Jean Kouassi" required>
                         </div>
 
-                        <!-- Champ Email -->
-                        <div class="form-group">
-                            <label for="emailaddress" class="required-field">Email</label>
-                            <input type="email" id="emailaddress" name="email" placeholder="Ex: jean.kouassi@email.com"
-                                required aria-required="true" title="Veuillez entrer votre adresse email valide">
+                        <div class="form-group-modern">
+                            <label class="required-field">Email</label>
+                            <input type="email" id="emailaddress" placeholder="Ex: jean.kouassi@email.com" required>
                         </div>
 
-                        <!-- Champ Téléphone -->
-                        <div class="form-group">
-                            <label for="phonenumber">Téléphone</label>
-                            <input type="tel" id="phonenumber" name="phone" placeholder="Ex: +225 07 00 00 00"
-                                title="Veuillez entrer votre numéro de téléphone (optionnel)">
+                        <div class="form-group-modern">
+                            <label>Téléphone</label>
+                            <input type="tel" id="phonenumber" placeholder="Ex: +225 07 00 00 00">
                         </div>
 
-                        <!-- Type de demande -->
-                        <div class="form-group">
-                            <label for="requesttype" class="required-field">Type de demande</label>
-                            <select id="requesttype" name="subject" required aria-required="true"
-                                title="Veuillez sélectionner le type de votre demande">
+                        <div class="form-group-modern">
+                            <label class="required-field">Type de demande</label>
+                            <select id="requesttype" required>
                                 <option value="" disabled selected>-- Sélectionnez une option --</option>
                                 <option value="location">Location de résidence</option>
                                 <option value="achat">Achat de bien</option>
@@ -303,215 +524,149 @@
                                 <option value="estimation">Estimation gratuite</option>
                                 <option value="partenariat">Partenariat</option>
                                 <option value="information">Demande d'information</option>
-                                <option value="autre">Autre</option>
                             </select>
                         </div>
 
-                        <!-- Message -->
-                        <div class="form-group">
-                            <label for="messagecontent" class="required-field">Message</label>
-                            <textarea id="messagecontent" name="message" rows="6"
-                                placeholder="Décrivez votre projet ou votre demande en détail..." required
-                                aria-required="true" title="Veuillez entrer votre message"></textarea>
+                        <div class="form-group-modern">
+                            <label class="required-field">Message</label>
+                            <textarea id="messagecontent" rows="5" placeholder="Décrivez votre projet..."
+                                required></textarea>
                         </div>
 
-                        <!-- Budget approximatif (optionnel) -->
-                        <div class="form-group">
-                            <label for="budget">Budget approximatif (FCFA)</label>
-                            <input type="text" id="budget" name="budget" placeholder="Ex: 50 000 000"
-                                title="Indiquez votre budget approximatif (optionnel)">
+                        <div class="form-group-modern">
+                            <label>Budget approximatif (FCFA)</label>
+                            <input type="text" id="budget" placeholder="Ex: 50 000 000">
                         </div>
 
-                        <!-- Préférence de contact -->
-                        <div class="form-group">
+                        <div class="form-group-modern">
                             <label>Préférence de contact</label>
-                            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="contactPref" value="telephone" checked>
-                                    <span>Téléphone</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="contactPref" value="email">
-                                    <span>Email</span>
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="radio" name="contactPref" value="whatsapp">
-                                    <span>WhatsApp</span>
-                                </label>
+                            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                                <label><input type="radio" name="contactPref" value="telephone" checked>
+                                    Téléphone</label>
+                                <label><input type="radio" name="contactPref" value="email"> Email</label>
+                                <label><input type="radio" name="contactPref" value="whatsapp"> WhatsApp</label>
                             </div>
                         </div>
 
-                        <!-- Newsletter -->
-                        <div class="form-group">
-                            <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="checkbox" name="newsletter" value="yes">
-                                <span>Je souhaite recevoir les offres exclusives et les nouveautés</span>
+                        <div class="form-group-modern">
+                            <label>
+                                <input type="checkbox" name="newsletter"> Je souhaite recevoir les offres exclusives
                             </label>
                         </div>
 
-                        <!-- Consentement RGPD -->
-                        <div class="form-group">
-                            <label style="display: flex; align-items: flex-start; gap: 0.5rem;">
-                                <input type="checkbox" name="consent" value="yes" required aria-required="true">
-                                <span style="font-size: 0.9rem;">
-                                    J'accepte que mes données soient traitées pour me recontacter.
-                                    <a href="#" style="color: var(--primary);">Politique de confidentialité</a>
-                                </span>
+                        <div class="form-group-modern">
+                            <label>
+                                <input type="checkbox" name="consent" required> J'accepte que mes données soient
+                                traitées
                             </label>
                         </div>
 
-                        <!-- Bouton d'envoi -->
-                        <button type="submit" class="btn"
-                            style="background: var(--primary); color: white; border: none; font-size: 1.1rem; padding: 1rem;">
-                            📨 Envoyer mon message
-                        </button>
-
-                        <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--gray);">
-                            En soumettant ce formulaire, je confirme avoir pris connaissance de la politique de
-                            confidentialité.
-                        </p>
+                        <button type="submit" class="btn-submit">📨 Envoyer mon message</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section Carte Interactive -->
-    <section class="map-section">
+    <!-- ===== SECTION CARTE ===== -->
+    <section class="map-section-modern">
         <div class="container">
-            <div class="map-container">
-                <h3 style="color: var(--primary-dark);">Notre localisation</h3>
-                <p class="text-gray" style="margin-bottom: 1.5rem;">
-                    Venez nous rencontrer dans nos locaux à Cocody Riviera 3
-                </p>
+            <div class="map-container-modern">
+                <h3 style="color: var(--primary);">Notre localisation</h3>
+                <p class="text-gray">Venez nous rencontrer dans nos locaux à Cocody Riviera 3</p>
 
-                <!-- Carte interactive -->
-                <div class="map-placeholder">
-                    <div>
-                        <div class="map-icon" aria-hidden="true">📍</div>
-                        <h4 style="color: white;">Cocody Riviera 3</h4>
-                        <p style="color: white;">Abidjan, Côte d'Ivoire</p>
-                        <p style="color: var(--gold); margin: 0.5rem 0;">À côté du Centre Commercial</p>
-
-                        <!-- Bouton d'itinéraire -->
-                        <button class="btn map-button" onclick="openGoogleMaps()"
-                            aria-label="Obtenir l'itinéraire sur Google Maps">
-                            🗺️ Obtenir l'itinéraire
-                        </button>
-
-                        <!-- Lien direct -->
-                        <p style="margin-top: 1rem;">
-                            <a href="#" style="color: white; text-decoration: underline;" onclick="openGoogleMaps()">
-                                Google Maps
-                            </a>
-                            <span style="color: white; margin: 0 0.5rem;">|</span>
-                            <a href="#" style="color: white; text-decoration: underline;" onclick="openWaze()">
-                                Waze
-                            </a>
-                        </p>
-                    </div>
+                <div class="map-placeholder-modern">
+                    <div class="map-icon">📍</div>
+                    <h4 style="color: white;">Cocody Riviera 3</h4>
+                    <p>Abidjan, Côte d'Ivoire</p>
+                    <p style="color: var(--gold);">À côté du Centre Commercial</p>
+                    <button class="map-button" onclick="openGoogleMaps()">🗺️ Obtenir l'itinéraire</button>
                 </div>
 
-                <!-- Informations complémentaires -->
-                <div
-                    style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding: 1rem; background: var(--gray-light); border-radius: var(--radius-lg);">
-                    <div>
-                        <strong style="color: var(--primary);">🚗 Parking</strong>
-                        <p>Parking gratuit disponible</p>
-                    </div>
-                    <div>
-                        <strong style="color: var(--primary);">♿ Accessibilité</strong>
-                        <p>Accès handicapés</p>
-                    </div>
-                    <div>
-                        <strong style="color: var(--primary);">🔒 Sécurité</strong>
-                        <p>Gardiens 24h/24</p>
-                    </div>
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 24px;">
+                    <div><strong>🚗 Parking gratuit</strong></div>
+                    <div><strong>♿ Accessibilité</strong></div>
+                    <div><strong>🔒 Gardiens 24h/24</strong></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section FAQ Rapide -->
-    <section class="section" style="padding-top: 0;">
+    <!-- ===== FAQ ===== -->
+    <section class="section">
         <div class="container">
-            <div class="section-title">
-                <h2>Questions fréquentes</h2>
+            <div class="section-header">
+                <span class="section-tag">✦ Questions fréquentes ✦</span>
+                <h2>Besoin d'aide ?</h2>
             </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                <div
-                    style="background: white; padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">⏱️ Délai de réponse ?</h4>
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h4>⏱️ Délai de réponse ?</h4>
                     <p>Je réponds à tous les messages sous 2 heures maximum, 7j/7.</p>
                 </div>
-                <div
-                    style="background: white; padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">📋 Comment préparer une visite ?</h4>
-                    <p>Contactez-moi 24h à l'avance pour organiser une visite de nos biens.</p>
+                <div class="faq-card">
+                    <h4>📋 Comment préparer une visite ?</h4>
+                    <p>Contactez-moi 24h à l'avance pour organiser une visite.</p>
                 </div>
-                <div
-                    style="background: white; padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
-                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">💰 Estimation gratuite ?</h4>
-                    <p>Oui, je propose des estimations gratuites et sans engagement.</p>
+                <div class="faq-card">
+                    <h4>💰 Estimation gratuite ?</h4>
+                    <p>Oui, je propose des estimations gratuites sans engagement.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Yves Gnenessemin</h3>
-                <p>Agent immobilier certifié</p>
-                <p>Partenaire officiel hôtels & entreprises</p>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Gnenessemin<br><small>IMMOBILIER</small></h3>
+                    <p>Agent immobilier certifié, partenaire officiel des plus grands hôtels et entreprises de Côte
+                        d'Ivoire.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="residences.html">Résidences</a></li>
+                        <li><a href="maisons.html">Maisons</a></li>
+                        <li><a href="terrains.html">Terrains</a></li>
+                        <li><a href="location.html">Location</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📞 +225 07 10 07 65 50</li>
+                        <li>✉️ dgnenessemin@byupathway.edu</li>
+                        <li>📍 Cocody Riviera 3</li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Contact Rapide</h3>
-                <p><i>📞</i> <span class="agent-phone">+225 07 10 07 65 50</span></p>
-                <p><i>✉️</i> <span class="agent-email">dgnenessemin@byupathway.edu</span></p>
-                <p><i>📍</i> Cocody Riviera 3, Abidjan</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Yves Gnenessemin - Agent Immobilier Certifié. Tous droits réservés.</p>
             </div>
-            <div class="footer-section">
-                <h3>Liens utiles</h3>
-                <p class="footer-links"><a href="residences.html">Résidences</a></p>
-                <p class="footer-links"><a href="express-vente.html">Ventes Express</a></p>
-                <p class="footer-links"><a href="partenaires.html">Partenaires</a></p>
-            </div>
-        </div>
-        <div class="copyright">
-            © 2025 Yves Gnenessemin - Agent Immobilier Certifié. Tous droits réservés.
         </div>
     </footer>
 
-    <script src="js/properties.js"></script>
-    <script src="js/partners.js"></script>
-    <script src="js/main.js"></script>
     <script>
-        // Configuration
         const CONFIG = {
-            phone: '2250789456789',
-            email: 'yves.gnenessemin@azania.ci',
+            phone: '2250710076550',
+            email: 'dgnenessemin@byupathway.edu',
             agentName: 'Yves Gnenessemin'
         };
 
-        // Fonction d'envoi du formulaire
         function sendMessage(event) {
             event.preventDefault();
 
-            // Récupération des valeurs du formulaire
             const name = document.getElementById('fullname').value;
             const email = document.getElementById('emailaddress').value;
             const phone = document.getElementById('phonenumber').value;
             const subject = document.getElementById('requesttype').value;
             const message = document.getElementById('messagecontent').value;
             const budget = document.getElementById('budget').value;
-
-            // Récupération de la préférence de contact
             const contactPref = document.querySelector('input[name="contactPref"]:checked')?.value || 'non spécifié';
 
-            // Construction du message pour WhatsApp
             let fullMessage = `*NOUVEAU MESSAGE DE CONTACT*%0A%0A`;
             fullMessage += `👤 *Nom:* ${name}%0A`;
             fullMessage += `📧 *Email:* ${email}%0A`;
@@ -521,52 +676,19 @@
             fullMessage += `📱 *Contact préféré:* ${contactPref}%0A%0A`;
             fullMessage += `📝 *Message:*%0A${message}`;
 
-            // Ouverture de WhatsApp
             window.open(`https://wa.me/${CONFIG.phone}?text=${fullMessage}`, '_blank');
 
-            // Afficher le message de succès
             document.getElementById('formSuccess').classList.add('show');
-
-            // Réinitialiser le formulaire
             document.getElementById('contactForm').reset();
 
-            // Masquer le message après 5 secondes
             setTimeout(() => {
                 document.getElementById('formSuccess').classList.remove('show');
             }, 5000);
         }
 
-        // Fonction pour ouvrir Google Maps
         function openGoogleMaps() {
             window.open('https://www.google.com/maps/search/?api=1&query=Cocody+Riviera+3+Abidjan', '_blank');
         }
-
-        // Fonction pour ouvrir Waze
-        function openWaze() {
-            window.open('https://www.waze.com/ul?ll=5.3599,-4.0083&navigate=yes', '_blank');
-        }
-
-        // Fonction WhatsApp générale
-        function openWhatsApp() {
-            window.open(`https://wa.me/${CONFIG.phone}?text=Bonjour%20${CONFIG.agentName}%2C%20je%20souhaite%20des%20informations.`, '_blank');
-        }
-
-        // Validation en temps réel du formulaire
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contactForm');
-            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-
-            inputs.forEach(input => {
-                input.addEventListener('invalid', (e) => {
-                    e.preventDefault();
-                    input.style.borderColor = 'var(--red)';
-                });
-
-                input.addEventListener('input', () => {
-                    input.style.borderColor = '#ddd';
-                });
-            });
-        });
     </script>
 </body>
 
